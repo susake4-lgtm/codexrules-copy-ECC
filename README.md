@@ -17,6 +17,7 @@
 1. `.codex/AGENTS.md`
    - 放机器级默认协作规则
    - 只写跨项目稳定的默认行为
+   - `plan` 确认后提醒判断是否需要 skills / MCP
 2. `.codex/config.toml`
    - 放运行时配置
    - 只保留适合公开复用的基线，不带本机私有 `projects.*`
@@ -31,11 +32,13 @@
 ## 设计原则
 
 1. `global-first`
-   - 先收本机级默认规则，再由项目级 `AGENTS.md` 做补充
+   - 先收本机级默认规则
+   - 项目级 `AGENTS.md` 只在仓库存在特殊边界时再补
 2. `runtime-only`
    - 只放运行时会读到的内容，不把长篇设计文档混进来
 3. `layered`
    - 总规则、运行配置、角色提示词、skills 明确分层
+   - 全局规则是主层，skills / MCP 是默认能力层，项目级规则是差异层
 4. `safe rollout`
    - 推荐启用顺序是：
    - `~/.codex/AGENTS.md`
@@ -76,6 +79,13 @@
 5. `skill-create`
 6. `find-skills`
 
+## 当前默认运行口径
+
+1. `plan` 确认后再进入实施。
+2. `plan` 确认后，会先提醒判断现有 skills / MCP 是否已经足够，或是否值得补充新的能力层。
+3. 这个提醒不等于自动新增 skills / MCP。
+4. 如果项目没有明显仓库特化边界，可以只用全局规则、全局 skills 和按需启用的 MCP，不必再写项目级 `AGENTS.md`。
+
 ## 安装建议
 
 ### 1. AGENTS
@@ -113,4 +123,3 @@ ln -snf "$(pwd)/.agents/skills" ~/.agents/skills
 1. 这个仓库是“可公开复用的运行时配置版本”，不是完整设计档归档。
 2. 如果你要看为什么这样分层、为什么这样 rollout，需要回到原项目里的 `docs/`。
 3. 如果你要继续扩展第二批 skills，建议保持同样的分层纪律，不要把项目级规则重新抬到全局层。
-

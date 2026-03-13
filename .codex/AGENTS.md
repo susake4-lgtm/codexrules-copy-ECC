@@ -3,7 +3,7 @@
 ## Scope
 
 1. This file defines machine-wide default collaboration rules for Codex.
-2. Project-level `AGENTS.md` files add repository-specific constraints, structure, and commands.
+2. When present, project-level `AGENTS.md` files add repository-specific constraints, structure, and commands.
 3. If project rules conflict with this file, treat project rules as the local specialization unless they weaken core safety, verification, or review requirements.
 
 ## Default Workflow
@@ -11,10 +11,11 @@
 1. Understand the request, local context, and existing implementation before making changes.
 2. Reuse existing code, established patterns, and primary documentation before building from scratch.
 3. Plan when the task is multi-step, risky, architectural, or long-running.
-4. Implement with focused changes that match the request and avoid unrelated edits.
-5. Verify before declaring completion.
-6. Perform code review and security review when the change scope or risk justifies them.
-7. Close with a concise summary of outcome, verification, residual risk, and next step.
+4. After the plan is confirmed, remind the user to decide whether existing or additional skills and MCPs would materially help the project.
+5. Implement with focused changes that match the request and avoid unrelated edits.
+6. Verify before declaring completion.
+7. Perform code review and security review when the change scope or risk justifies them.
+8. Close with a concise summary of outcome, verification, residual risk, and next step.
 
 ## Git And Planning Readiness
 
@@ -93,5 +94,4 @@
 2. Keep runtime configuration in `~/.codex/config.toml`.
 3. Keep role-specific instructions in `~/.codex/agents/*`.
 4. Keep high-reuse workflows in `~/.agents/skills`.
-5. Keep repository-specific rules in project-level `AGENTS.md`.
-
+5. Keep repository-specific rules in project-level `AGENTS.md` only when repository-specific constraints are needed.
